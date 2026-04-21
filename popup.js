@@ -80,5 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
         inputField.addEventListener('change', function() {
             checkFieldAndShowPopup(this.value);
         });
-    }
+    }e
 });
+// Example: Listen for input field changes and show red pop up if the value is "no"
+
+
+
+
+
+
+

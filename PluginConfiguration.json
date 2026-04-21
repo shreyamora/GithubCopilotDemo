@@ -1,0 +1,38 @@
+{
+  "PluginName": "AccountTaskCreationPlugin",
+  "Description": "Automatically creates a task record when an account is created in Dynamics 365",
+  "AssemblyName": "GithubCopilotDemo",
+  "ClassName": "GithubCopilotDemo.Plugins.AccountTaskCreationPlugin",
+  "Registration": {
+    "Entity": "account",
+    "Message": "Create",
+    "Stage": "PostOperation",
+    "Mode": "Synchronous",
+    "Rank": 1,
+    "ExecuteAsUserId": "System",
+    "ImpersonatingUserId": null,
+    "FilteringAttributes": [
+      "name",
+      "ownerid",
+      "industry"
+    ]
+  },
+  "TaskCreationConfiguration": {
+    "SubjectTemplate": "Follow-up: New Account - {AccountName}",
+    "DescriptionTemplate": "New account created.\n\nAccount Name: {AccountName}\nIndustry: {Industry}\nCreated Date: {CreatedDate}",
+    "DueDateOffsetDays": 3,
+    "Priority": "Normal",
+    "Status": "Open",
+    "InheritOwnerFromAccount": true
+  },
+  "ErrorHandling": {
+    "ThrowException": true,
+    "NotifyAdmin": true,
+    "LogToTrace": true,
+    "RetryOnFailure": false
+  },
+  "Version": "1.0.0",
+  "Author": "Shreya Mora",
+  "CreatedDate": "2026-04-17",
+  "LastModified": "2026-04-17"
+}

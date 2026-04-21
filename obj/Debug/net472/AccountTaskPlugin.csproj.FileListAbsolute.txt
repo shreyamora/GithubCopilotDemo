@@ -1,0 +1,6 @@
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.csproj.AssemblyReference.cache
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.csproj.SuggestedBindingRedirects.cache
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.dll.config
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.csproj.CoreCompileInputs.cache
+C:\Users\shreya.mora\GithubDemo\GithubCopilotDemo\obj\Debug\net472\AccountTaskPlugin.sourcelink.json

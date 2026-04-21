@@ -1,0 +1,72 @@
+{
+  "name": "Create Task on Account Creation",
+  "description": "Automatically creates a task record when a new account is created in Dynamics 365",
+  "trigger": {
+    "type": "Dynamics365",
+    "entity": "account",
+    "event": "when a record is created"
+  },
+  "actions": [
+    {
+      "action": "GetRecord",
+      "description": "Get Account Details",
+      "parameters": {
+        "table": "account",
+        "recordId": "@triggerOutputs()['body/accountid']"
+      }
+    },
+    {
+      "action": "Condition",
+      "description": "Validate Account Name",
+      "condition": {
+        "comparison": "is not empty",
+        "value": "@outputs('GetRecord')['name']"
+      },
+      "ifTrue": [
+        {
+          "action": "CreateRecord",
+          "description": "Create Task Record",
+          "parameters": {
+            "table": "tasks",
+            "fields": {
+              "subject": "@concat('Follow-up: New Account - ', outputs('GetRecord')['name'])",
+              "description": "@concat('New account created.\\n\\nAccount Name: ', outputs('GetRecord')['name'], '\\nIndustry: ', if(contains(outputs('GetRecord'), 'industry'), outputs('GetRecord')['industry'], 'N/A'), '\\nCreated Date: ', utcNow('yyyy-MM-dd'))",
+              "regardingobjectid": "@triggerOutputs()['body/accountid']",
+              "ownerid": "@outputs('GetRecord')['ownerid']",
+              "prioritycode": 1,
+              "scheduledend": "@addDays(utcNow(), 3)"
+            }
+          }
+        },
+        {
+          "action": "Compose",
+          "description": "Log Success",
+          "inputs": "@concat('Task created successfully for account: ', outputs('GetRecord')['name'])"
+        }
+      ],
+      "ifFalse": [
+        {
+          "action": "Compose",
+          "description": "Log Validation Error",
+          "inputs": "Account name is empty. Task creation skipped."
+        }
+      ]
+    }
+  ],
+  "errorHandling": {
+    "onError": [
+      {
+        "action": "SendEmailNotification",
+        "to": "admin@company.com",
+        "subject": "Error in Create Task on Account Creation Flow",
+        "body": "@outputs('ErrorMessage')"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Shreya Mora",
+    "createdDate": "2026-04-17",
+    "environment": "Dynamics 365"
+  }
+}
